@@ -34,18 +34,16 @@ BONUS 2: Ordinare i dischi per anno di uscita. -->
             <!-- HEADER -->
             <header>
                 <h2>i tuoi album</h2>
-                <select v-model="selGenre">
-                    <option selected value="">All genres</option>
-                    <option v-for="genre in genres" v-bind:value="genre">
-                        {{ genre }}
-                    </option>
+                <select @change="switchSelect(event)">
+                    <option value="all">All</option>
+                    <option v-for="genre in genres" :value="genre">{{genre}}</option>
                 </select>
             </header>
 
             <!-- MAIN -->
             <main>
                 <div class="slideshow-container">
-                    <div v-for="album in albums" class="album-container">
+                    <div v-for="album in (selGenre == '' || selGenre == 'all' ? albums : filteredAlbums)" class="album-container">
                         <figure>
                             <img :src="album.poster" alt="">
                             <div class="play-button">

@@ -4,8 +4,10 @@ function initVue() {
 
         el: '#app',
         data: {
+
             albums: [],
             genres: [],
+            filteredAlbums: [],
             selGenre: '',
         },
         mounted() {
@@ -23,20 +25,27 @@ function initVue() {
                         this.genres.push(this.albums[i].genre)
                     }
                 }
-                console.log(this.genres);
             })
             .catch()
         },
         methods:{
-            
-            getFilterAlbums: function() {
+            switchSelect(event) {
 
-                console.log();
-                // for (let i=0; i<this.albums.length; i++){
+            let arr = []
+            this.selGenre = event.target.value;
 
-                //     if(){}
-                // }
-            },
+            for (let i = 0; i < this.albums.length; i++){
+
+                const album = this.albums[i]
+
+                if (album.genre == this.selGenre) {
+
+                    arr.push(album)
+                }
+            }
+                
+                this.filteredAlbums = arr
+            }
         }
     });
 };
