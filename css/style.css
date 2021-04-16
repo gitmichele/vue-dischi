@@ -1,0 +1,78 @@
+/* REGOLE GENERALI */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#app{
+    background-color: #191414;
+    padding: 0 15%;
+    overflow: auto;
+}
+.container{
+    height: 100vh;
+}
+a{
+    color: #fff;
+    text-decoration: none;
+}
+
+/* HEADER */
+header{
+    height: 180px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    padding-left: 30px;
+}
+
+/* MAIN */
+.slideshow-container{
+    width: 90%;
+    margin: 30px auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+.album-container{
+    width: 20%;
+    margin: 25px;
+    justify-self: flex-start;
+}
+.album-container figure{
+    display: flex;
+    height: 80%;
+    align-items: center;
+     position: relative;
+     cursor: pointer;
+}
+.album-container img{
+    width: 100%;
+}
+.album-container figure .play-button{
+    display: none;
+}
+.album-container img:hover{
+    opacity: .5;
+}
+.album-container img:hover + .play-button{
+    display: block;
+    color: #fff;
+    position: absolute;
+    font-size: 5em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+.album-container .album-text{
+    color: #fff;
+    text-align: center;
+}
+.album-container .album-text h3,
+.album-container .album-text h4{
+    margin-bottom: 8px;
+}
+.album-container .album-text p{
+    margin-bottom: 3px;
+}
+
