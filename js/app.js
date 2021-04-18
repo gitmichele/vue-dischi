@@ -3,50 +3,69 @@ function initVue() {
     new Vue({
 
         el: '#app',
+
         data: {
 
             albums: [],
-            genres: [],
-            filteredAlbums: [],
-            selGenre: '',
+            selected: ''
         },
+
         mounted() {
 
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
-            .then((data) => {
+            .then(data => {
 
-                const arr = data.data.response;
-                this.albums = arr;
+                this.albums = data.data.response
+            })
+            .catch(() => {
 
-                for (let i = 0; i < this.albums.length; i++) {
+                console.log('error');
+            })
+        },
 
-                    if (!this.genres.includes(this.albums[i].genre)) {
+        computed: {
 
-                        this.genres.push(this.albums[i].genre)
+            getGenres: function() {
+
+                const arr = [];
+
+                for (let i=0; i<this.albums.length; i++){
+                
+                    const album = this.albums[i];
+
+                    if (!arr.includes(album.genre)){
+
+                        arr.push(album.genre)
+                    };
+                };
+
+                return arr
+            },
+            getFilteredByGenre: function() {
+
+                let arr = [];
+
+                if (this.selected != ''){
+
+                    for (let i = 0; i < this.albums.length; i++) {
+
+                        const album = this.albums[i];
+
+                        if (album.genre == this.selected) {
+
+                            arr.push(album)
+                        }
                     }
                 }
-            })
-            .catch()
-        },
-        methods:{
-            switchSelect(event) {
+                else{
 
-            let arr = []
-            this.selGenre = event.target.value;
-
-            for (let i = 0; i < this.albums.length; i++){
-
-                const album = this.albums[i]
-
-                if (album.genre == this.selGenre) {
-
-                    arr.push(album)
+                    arr = this.albums
                 }
-            }
-                
-                this.filteredAlbums = arr
-            }
+
+                return arr
+            },
         }
+
     });
 };
 

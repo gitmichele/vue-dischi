@@ -34,16 +34,20 @@ BONUS 2: Ordinare i dischi per anno di uscita. -->
             <!-- HEADER -->
             <header>
                 <h2>i tuoi album</h2>
-                <select @change="switchSelect(event)">
-                    <option value="all">All</option>
-                    <option v-for="genre in genres" :value="genre">{{genre}}</option>
+                <select v-model="selected">
+                    <option selected value="">All</option>
+                    <option v-for="genre in getGenres" 
+                        :value="genre">
+                        {{ genre }}
+                    </option>
                 </select>
             </header>
 
             <!-- MAIN -->
             <main>
                 <div class="slideshow-container">
-                    <div v-for="album in (selGenre == '' || selGenre == 'all' ? albums : filteredAlbums)" class="album-container">
+                    <div class="album-container"
+                        v-for="album in getFilteredByGenre">
                         <figure>
                             <img :src="album.poster" alt="">
                             <div class="play-button">
@@ -52,16 +56,16 @@ BONUS 2: Ordinare i dischi per anno di uscita. -->
                         </figure>
                         <div class="album-text">
                             <h3>
-                                <a href="#">{{album.author}}</a>
+                                <a href="#">{{ album.title }}</a>
                             </h3>
                             <h4>
-                                <a href="#">{{album.title}}</a>
+                                <a href="#">{{ album.author }}</a>
                             </h4>
                             <p>
-                                <a href="#">{{album.genre}}</a>
+                                <a href="#">{{ album.genre }}</a>
                             </p>
                             <p>
-                                <a href="#">{{album.year}}</a>
+                                <a href="#">{{ album.year }}</a>
                             </p>
                         </div>
                     </div>
