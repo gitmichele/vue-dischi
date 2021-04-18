@@ -15,7 +15,8 @@ function initVue() {
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
             .then(data => {
 
-                this.albums = data.data.response
+                let arr = data.data.response
+                this.albums = arr.sort((a, b) => b.year - a.year)
             })
             .catch(() => {
 
@@ -65,7 +66,6 @@ function initVue() {
                 return arr
             },
         }
-
     });
 };
 
